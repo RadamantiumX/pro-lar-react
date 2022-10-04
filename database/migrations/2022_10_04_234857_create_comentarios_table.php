@@ -14,7 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('comentarios', function (Blueprint $table) {
-            $table->id();
+            $table->string('email')->primary();
+            $table->string('celular');
+            $table->string('comentario');
             $table->timestamps();
         });
     }
