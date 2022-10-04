@@ -10,6 +10,7 @@ class Comentario extends Model
     use HasFactory;
 
     protected $fillable = [
+         'email',
          'celular',
          'comentario',
     ];
