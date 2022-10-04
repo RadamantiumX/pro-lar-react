@@ -12,7 +12,12 @@ class GoogleController extends Controller
 {
     public function redirectToGoogle()
     {
-        return Socialite::driver('google')->redirect();
+
+        $user = Socialite::driver('google')->stateless()->redirect();
+
+
+
+        return $user;
     }
 
     /**
@@ -24,13 +29,17 @@ class GoogleController extends Controller
     {
         try {
 
-            $user = Socialite::driver('google')->user();
+            $user = Socialite::driver('google')->stateless()->user();
 
             $finduser = User::where('google_id', $user->id)->first();
+
+
 
             if($finduser){
 
                 Auth::login($finduser);
+
+                dump($finduser);
 
                 return redirect()->intended('home');
 
@@ -43,6 +52,8 @@ class GoogleController extends Controller
                 ]);
 
                 Auth::login($newUser);
+
+
 
                 return redirect()->intended('home');
             }
