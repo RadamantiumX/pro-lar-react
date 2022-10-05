@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ComentariosController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GoogleController;
 
@@ -26,5 +27,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('auth/google', [GoogleController::class, 'redirectToGoogle']);
 Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
 
-
+Route::post('/home',[ComentariosController::class,'store'])->name('comentarios');
 

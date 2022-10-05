@@ -39,7 +39,7 @@ class GoogleController extends Controller
 
                 Auth::login($finduser);
 
-                dump($finduser);
+
 
                 return redirect()->intended('home');
 
