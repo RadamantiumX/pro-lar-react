@@ -35,6 +35,16 @@
       <div class="modal-body">
         <form action="{{ route('comentarios') }}" method="POST">
             @csrf
+            @if (session('success'))
+              <script>
+                 alert("{{ session('success') }}")
+              </script>
+            @endif
+            @if (session('error'))
+            <script>
+                alert("{{ session('error') }}")
+             </script>
+            @endif
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label">Email:</label>
             <input type="email" class="form-control" id="email" value="{{ Auth::user()->email }}">
@@ -47,11 +57,12 @@
             <label for="message-text" class="col-form-label">Comentario:</label>
             <textarea class="form-control" id="comentario"></textarea>
           </div>
+          <button type="submit" class="btn btn-primary">Enviar petición</button>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Send message</button>
+
       </div>
     </div>
   </div>
