@@ -21,7 +21,7 @@
     </div>
    <!--Inicio MODAL-->
 
-  <button type="button" class="btn btn-primary row justify-conten-center" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Open modal for @mdo</button>
+  <button type="button" class="btn btn-primary row justify-conten-center" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Quiero recibir ayuda para mi sitio web</button>
 
 
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -32,32 +32,27 @@
         <h1 class="modal-title fs-5" id="exampleModalLabel">New message</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
+
       <div class="modal-body">
+
         <form action="{{ route('comentarios') }}" method="POST">
             @csrf
-            @if (session('success'))
-              <script>
-                 alert("{{ session('success') }}")
-              </script>
-            @endif
-            @if (session('error'))
-            <script>
-                alert("{{ session('error') }}")
-             </script>
-            @endif
+
+
+
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label">Email:</label>
-            <input type="email" class="form-control" id="email" value="{{ Auth::user()->email }}">
+            <input type="email" class="form-control" name="email" value="{{ Auth::user()->email }}">
           </div>
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label">Celular:</label>
-            <input type="text" class="form-control" id="celular">
+            <input type="text" class="form-control" name="celular">
           </div>
           <div class="mb-3">
             <label for="message-text" class="col-form-label">Comentario:</label>
-            <textarea class="form-control" id="comentario"></textarea>
+            <textarea class="form-control" name="comentario"></textarea>
           </div>
-          <button type="submit" class="btn btn-primary">Enviar petición</button>
+          <input type="submit" class="btn btn-primary" value="Enviar petición">
         </form>
       </div>
       <div class="modal-footer">
@@ -72,7 +67,22 @@
 
 
 </div>
+  @if (session('success'))
 
+              <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                <strong>{{ session('success') }}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+
+     @endif
+        @if (session('error'))
+
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>{{ session('error') }}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+
+     @endif
 
 
 <!--Capa de React ejemplo-->

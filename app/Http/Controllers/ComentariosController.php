@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Models\Comentario;
 
+use Illuminate\Support\Facades\DB;
+
 class ComentariosController extends Controller
 {
     /**
@@ -42,9 +44,11 @@ class ComentariosController extends Controller
             'comentario'=>'required|max:500'
         ]);
 
+        $match = $request->input('email');
 
+        $compare = DB::table('comentarios')->where('email', $match)->exists();
 
-
+        if (!$compare){
 
 
         $comentario = new Comentario();
@@ -54,6 +58,10 @@ class ComentariosController extends Controller
 
         $comentario->save();
         return redirect()->route('home')->with('success','Mensaje enviado!');
+      }else{
+          return redirect()->route('home')->with('error','El email asociado ya se encuentra con una solicitud pendiente');
+      }
+
     }
 
     /**
